@@ -8,6 +8,8 @@ import {fetchShow as mockFetchShow} from './api/fetchShow';
 
 jest.mock('./api/fetchShow')
 
+
+
 const episodeData = {
     episodes: [
         {
@@ -83,13 +85,13 @@ test('render without errors', () => {
 
 test('render episodes when API is called', async () => {
 
-    mockFetchShow.mockResolveValueOnce(episodeData);
+    mockFetchShow.mockResolvedValueOnce(episodeData);
 
     render(<App/>)
 
     userEvent.selectOptions()
 
-    await waitFor(() => screen.getAllByTestId(/episodes/i))
+    await waitFor(() => screen.findByTestId(/episodes/i))
 
-    expect(screen.getAllByTestId(/episodes/i)).toHaveLength(3)
+    expect(screen.findByTestId(/episodes/i)).toHaveLength(3)
 })
